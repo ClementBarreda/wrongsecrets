@@ -1,0 +1,13 @@
+[extend]
+# On garde TOUTES les règles de détection par défaut de Gitleaks, on ajoute
+# juste une exclusion par-dessus.
+useDefault = true
+
+[allowlist]
+# Sans ça, gitleaks scanne SON PROPRE fichier de baseline (qui contient les
+# valeurs des secrets connus en clair, par construction) et les détecte comme
+# de "nouveaux" secrets à chaque run -> faux positifs en boucle.
+paths = [
+  '''\.gitleaks-baseline\.json''',
+  '''gitleaks-report\.(json|sarif)''',
+]
